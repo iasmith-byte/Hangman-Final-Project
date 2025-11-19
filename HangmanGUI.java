@@ -32,6 +32,9 @@ public class HangmanGUI extends JFrame {
     private JLabel displayScore2;
     //private center box
     private HangmanCanvas centerBox;
+    //InnerCenterBox
+    private JPanel innerCenterBox;
+    private Dimension inputSize;
 
 
 
@@ -46,9 +49,11 @@ public class HangmanGUI extends JFrame {
         setLayout(new BorderLayout());
         //getContentPane().setLayout(new FlowLayout());
 
+
+
         //create new object to display words\
-        String word = "Flour";
-        int n = word.length();
+        String[] word = {"F","l","o","u","r"};
+        int n = word.length;
 
         String[] dashes = new String[n];
         Arrays.fill(dashes, "_");
@@ -78,10 +83,15 @@ public class HangmanGUI extends JFrame {
         //adds them to the screen
         add(letters, BorderLayout.SOUTH);
 
+        //Inner JPanel for Try Again button
         innerBox = new JPanel(new BorderLayout());
+        //positions the panel to the east (Right hand Side)
         add(innerBox, BorderLayout.EAST);
+        //creates a new JButton object for Trying another word
         tryAgain = new JButton("Try Another Word");
+        //Adds the button to the innerBox and positions it south in the east panel
         innerBox.add(tryAgain, BorderLayout.SOUTH);
+
 
         //creates new panel object for the left hand side of the GUI
         westBox = new JPanel(new FlowLayout());
@@ -100,6 +110,17 @@ public class HangmanGUI extends JFrame {
         centerBox = new HangmanCanvas();
         //adds the panel to the center
         add(centerBox, BorderLayout.CENTER);
+
+        //Text Field for input
+        innerCenterBox = new JPanel();
+        centerBox.add(innerCenterBox);
+        textInput = new JTextField("Enter a letter: ");
+        inputSize = new Dimension(100, 20);
+        textInput.setPreferredSize(inputSize);
+        innerCenterBox.add(textInput, BorderLayout.SOUTH);
+
+
+
 
 
         //tryAgain.setPreferredSize(buttonSize);
