@@ -102,39 +102,12 @@ public class HangmanGUI extends JFrame {
         add(centerBox, BorderLayout.CENTER);
 
 
-
-
-
-
-
-
-
         //tryAgain.setPreferredSize(buttonSize);
 //        tryAgain.setBounds(50, 50, 20, 50); // x=50, y=50, width=100, height=50
 //        add(tryAgain);
 //        tryAgain.setLayout(new GridLayout(2, 5));
 //        add(tryAgain);
 
-
-//
-//
-//        // Input panel
-//        JPanel inputPanel = new JPanel();
-//        guessField = new JTextField(1); // single letter input
-//        JButton guessButton = new JButton("Guess");
-//        inputPanel.add(new JLabel("Enter a letter:"));
-//        inputPanel.add(guessField);
-//        inputPanel.add(guessButton);
-//        add(inputPanel, BorderLayout.CENTER);
-//
-//        // Feedback and score
-//        JPanel infoPanel = new JPanel(new GridLayout(2,1));
-//        guessedLettersLabel = new JLabel("Guessed Letters: ");
-//        topScoreLabel = new JLabel("Top Score: 0");
-//        infoPanel.add(guessedLettersLabel);
-//        infoPanel.add(topScoreLabel);
-//        add(infoPanel, BorderLayout.SOUTH);
-//
         setVisible(true);
     }
 
