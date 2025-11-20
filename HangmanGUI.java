@@ -7,8 +7,12 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.awt.Font;
+import java.util.List;
 import javax.swing.JLabel;
 
 public class HangmanGUI extends JFrame {
@@ -35,7 +39,35 @@ public class HangmanGUI extends JFrame {
     //InnerCenterBox
     private JPanel innerCenterBox;
     private Dimension inputSize;
-
+    private JPanel southBox;
+    //Button variables (**Will change in favor of loop)
+    private JButton letterA;
+    private JButton letterB;
+    private JButton letterC;
+    private JButton letterD;
+    private JButton letterE;
+    private JButton letterF;
+    private JButton letterG;
+    private JButton letterH;
+    private JButton letterI;
+    private JButton letterJ;
+    private JButton letterK;
+    private JButton letterL;
+    private JButton letterM;
+    private JButton letterN;
+    private JButton letterO;
+    private JButton letterP;
+    private JButton letterQ;
+    private JButton letterR;
+    private JButton letterS;
+    private JButton letterT;
+    private JButton letterU;
+    private JButton letterV;
+    private JButton letterW;
+    private JButton letterX;
+    private JButton letterY;
+    private JButton letterZ;
+    private int count;
 
 
     public HangmanGUI() {
@@ -49,11 +81,9 @@ public class HangmanGUI extends JFrame {
         setLayout(new BorderLayout());
         //getContentPane().setLayout(new FlowLayout());
 
-
-
         //create new object to display words\
-        String[] word = {"F","l","o","u","r"};
-        int n = word.length;
+        List<String> word = Arrays.asList("F","L","O","U","R");
+        int n = word.size();
 
         String[] dashes = new String[n];
         Arrays.fill(dashes, "_");
@@ -70,18 +100,255 @@ public class HangmanGUI extends JFrame {
         //adds them to screen and centers them north at the top of the screen
         add(textSlots, BorderLayout.NORTH);
 
-        //Button layout for letters to choose from
-        String[] alphabet = {"Z", "Y", "X", "W", "V", "U", "T", "S", "R", "Q", "P", "O", "N", "M", "L", "K", "J", "I", "H", "G", "F", "E", "D", "C", "B", "A"};
+        southBox = new JPanel();
+        southBox.setLayout(new GridLayout(2, 13));
+        add(southBox, BorderLayout.SOUTH);
+
+//
+//        //button(s)
+//        letterA = new JButton("A");
+//        letterA.addActionListener(e -> {
+//            textInput.setText("A");
+//            letterA.setEnabled(false);
+//
+//        });
+//        southBox.add(letterA, BorderLayout.SOUTH);
+//
+//        letterB= new JButton("B");
+//        letterB.addActionListener(e -> {
+//            textInput.setText("B");
+//            letterB.setEnabled(false);
+//
+//        });
+//        southBox.add(letterB, BorderLayout.SOUTH);
+//
+//
+//        letterC = new JButton("C");
+//        letterC.addActionListener(e -> {
+//            textInput.setText("C");
+//            letterC.setEnabled(false);
+//
+//        });
+//        southBox.add(letterC, BorderLayout.SOUTH);
+//
+//        letterD = new JButton("D");
+//        letterD.addActionListener(e -> {
+//            textInput.setText("D");
+//            letterD.setEnabled(false);
+//
+//        });
+//        southBox.add(letterD, BorderLayout.SOUTH);
+//
+//        letterE = new JButton("E");
+//        letterE.addActionListener(e -> {
+//            textInput.setText("E");
+//            letterE.setEnabled(false);
+//
+//        });
+//        southBox.add(letterE, BorderLayout.SOUTH);
+//
+//        letterF = new JButton("F");
+//        letterF.addActionListener(e -> {
+//            textInput.setText("F");
+//            letterF.setEnabled(false);
+//
+//        });
+//        southBox.add(letterF, BorderLayout.SOUTH);
+//
+//        letterG = new JButton("G");
+//        letterG.addActionListener(e -> {
+//            textInput.setText("G");
+//            letterG.setEnabled(false);
+//
+//        });
+//        southBox.add(letterG, BorderLayout.SOUTH);
+//
+//        letterH = new JButton("H");
+//        letterH.addActionListener(e -> {
+//            textInput.setText("H");
+//            letterH.setEnabled(false);
+//
+//        });
+//        southBox.add(letterH, BorderLayout.SOUTH);
+//
+//        letterI = new JButton("I");
+//        letterI.addActionListener(e -> {
+//            textInput.setText("I");
+//            letterI.setEnabled(false);
+//
+//        });
+//        southBox.add(letterI, BorderLayout.SOUTH);
+//
+//        letterJ = new JButton("J");
+//        letterJ.addActionListener(e -> {
+//            textInput.setText("J");
+//            letterJ.setEnabled(false);
+//
+//        });
+//        southBox.add(letterJ, BorderLayout.SOUTH);
+//
+//        letterK = new JButton("K");
+//        letterK.addActionListener(e -> {
+//            textInput.setText("K");
+//            letterK.setEnabled(false);
+//
+//        });
+//        southBox.add(letterK, BorderLayout.SOUTH);
+//
+//        letterL = new JButton("L");
+//        letterL.addActionListener(e -> {
+//            textInput.setText("L");
+//            letterL.setEnabled(false);
+//
+//        });
+//        southBox.add(letterL, BorderLayout.SOUTH);
+//
+//        letterM = new JButton("M");
+//        letterM.addActionListener(e -> {
+//            textInput.setText("M");
+//            letterM.setEnabled(false);
+//
+//        });
+//        southBox.add(letterM, BorderLayout.SOUTH);
+//
+//        letterN = new JButton("N");
+//        letterN.addActionListener(e -> {
+//            textInput.setText("N");
+//            letterN.setEnabled(false);
+//
+//        });
+//        southBox.add(letterN, BorderLayout.SOUTH);
+//
+//        letterO = new JButton("O");
+//        letterO.addActionListener(e -> {
+//            textInput.setText("O");
+//            letterO.setEnabled(false);
+//
+//        });
+//        southBox.add(letterO, BorderLayout.SOUTH);
+//
+//        letterP = new JButton("P");
+//        letterP.addActionListener(e -> {
+//            textInput.setText("P");
+//            letterP.setEnabled(false);
+//
+//        });
+//        southBox.add(letterP, BorderLayout.SOUTH);
+//
+//        letterQ = new JButton("Q");
+//        letterQ.addActionListener(e -> {
+//            textInput.setText("Q");
+//            letterQ.setEnabled(false);
+//
+//        });
+//        southBox.add(letterQ, BorderLayout.SOUTH);
+//
+//
+//        letterR = new JButton("R");
+//        letterR.addActionListener(e -> {
+//            textInput.setText("R");
+//            letterR.setEnabled(false);
+//
+//        });
+//
+//        southBox.add(letterR, BorderLayout.SOUTH);
+//
+//        letterS = new JButton("S");
+//        letterS.addActionListener(e -> {
+//            textInput.setText("S");
+//            letterS.setEnabled(false);
+//
+//        });
+//        southBox.add(letterS, BorderLayout.SOUTH);
+//
+//        letterT = new JButton("T");
+//        letterT.addActionListener(e -> {
+//            textInput.setText("T");
+//            letterT.setEnabled(false);
+//
+//        });
+//        southBox.add(letterT, BorderLayout.SOUTH);
+//
+//        letterU = new JButton("U");
+//        letterU.addActionListener(e -> {
+//            textInput.setText("U");
+//            letterU.setEnabled(false);
+//
+//        });
+//        southBox.add(letterU, BorderLayout.SOUTH);
+//
+//
+//        letterV = new JButton("V");
+//        letterV.addActionListener(e -> {
+//            textInput.setText("V");
+//            letterV.setEnabled(false);
+//
+//        });
+//        southBox.add(letterV, BorderLayout.SOUTH);
+//
+//
+//        letterW = new JButton("W");
+//        letterW.addActionListener(e -> {
+//            textInput.setText("W");
+//            letterW.setEnabled(false);
+//
+//        });
+//        southBox.add(letterW, BorderLayout.SOUTH);
+//
+//
+//        letterX = new JButton("X");
+//        letterX.addActionListener(e -> {
+//            textInput.setText("X");
+//            letterX.setEnabled(false);
+//
+//        });
+//        southBox.add(letterX, BorderLayout.SOUTH);
+//
+//        letterY = new JButton("Y");
+//        letterY.addActionListener(e -> {
+//            textInput.setText("Y");
+//            letterY.setEnabled(false);
+//
+//        });
+//        southBox.add(letterY, BorderLayout.SOUTH);
+//
+//        letterZ = new JButton("Z");
+//        letterZ.addActionListener(e -> {
+//            textInput.setText("Z");
+//            letterZ.setEnabled(false);
+//
+//        });
+//        southBox.add(letterZ, BorderLayout.SOUTH);
+
+        //Button creation
+        String[] alphabet = {"A","B","C","D","E","F","G","H","I","J","K","L","M",
+                "N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
         //new button object created
-        letters = new JButton();
-        //sets the layout for where the buttons will appear
-        letters.setLayout(new GridLayout(2, 5));
-        //for each loop creates new buttons for each letter of alphabet
             for (String c : alphabet) {
-                letters.add(new JButton(c), SwingConstants.CENTER);
+                JButton b = new JButton(c);
+                b.addActionListener(e -> {
+                    textInput.setText(c);
+                    // If the word contains the current alphabet letter
+                    if (word.contains(c)) {
+                        for (int i = 0; i < word.size(); i++) {
+                            if (c.equalsIgnoreCase(word.get(i))) {
+                                JLabel temp = (JLabel) textSlots.getComponent(i);
+                                temp.setText(word.get(i));
+                            }
+                        }
+                    }
+                    // Else
+                    else {
+                        count++;
+                        displayScore2.setText(String.valueOf(count));
+                    }
+                    // Draw hangman + increase count
+                    // If game condition met, end game
+                    b.setEnabled(false);
+                });
+                southBox.add(b);
+
             }
-        //adds them to the screen
-        add(letters, BorderLayout.SOUTH);
 
         //Inner JPanel for Try Again button
         innerBox = new JPanel(new BorderLayout());
@@ -115,13 +382,14 @@ public class HangmanGUI extends JFrame {
         innerCenterBox = new JPanel();
         centerBox.add(innerCenterBox);
         textInput = new JTextField("Enter a letter: ");
+//        textInput.setBounds(500, 500, 100, 20);
         inputSize = new Dimension(100, 20);
         textInput.setPreferredSize(inputSize);
         innerCenterBox.add(textInput, BorderLayout.SOUTH);
 
 
 
-
+//
 
         //tryAgain.setPreferredSize(buttonSize);
 //        tryAgain.setBounds(50, 50, 20, 50); // x=50, y=50, width=100, height=50
@@ -133,7 +401,10 @@ public class HangmanGUI extends JFrame {
     }
 
     public static void main(String[] args) {
-        new HangmanGUI();
+        HangmanGUI hg = new HangmanGUI();
+        // user selects letter
+        // update jpanels for word
+
 
     }
 }
