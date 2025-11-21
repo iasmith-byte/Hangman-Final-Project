@@ -2,6 +2,7 @@
 // https://www.jetbrains.com/help/idea/design-gui-using-swing.html#place_gui_components
 // https://docs.oracle.com/javase/8/docs/api/index.html?javax/swing/package-summary.html
 //https://docs.oracle.com/javase/7/docs/api/java/awt/BorderLayout.html
+//Project Partner Bree Stewart
 
 import javax.swing.*;
 import javax.swing.border.Border;
