@@ -45,7 +45,7 @@ public class HangmanCanvas extends JPanel {
 
         //Body parts
         //head
-        Ellipse2D.Double c = new Ellipse2D.Double(810, 100, 30, 30);
+        Ellipse2D.Double c = new Ellipse2D.Double(795, 90, 60, 60);
         //setColor allows to adjust custom RGB values
         g2.setColor(new Color(255, 255, 255));
         // g2.fill() fills the area defined by the shape
@@ -57,31 +57,31 @@ public class HangmanCanvas extends JPanel {
         g2.setColor(new Color(255, 255, 255));
         // g2.draw() defines the outline made by the shape
         g2.draw(h);
-        g2.drawLine(825,100,825,200);
+        g2.drawLine(825,100,825,250);
 
         // left leg
         g2.setColor(new Color(255, 255, 255));
         // g2.draw() defines the outline made by the shape
         g2.draw(h);
-        g2.drawLine(800,210,825,200);
+        g2.drawLine(750,350,825,250);
 
         // right leg
         g2.setColor(new Color(255, 255, 255));
         // g2.draw() defines the outline made by the shape
         g2.draw(h);
-        g2.drawLine(850,210,825,200);
+        g2.drawLine(910,350,825,250);
 
         //Right arm
         g2.setColor(new Color(255, 255, 255));
         // g2.draw() defines the outline made by the shape
         g2.draw(h);
-        g2.drawLine(880,150,825,160);
+        g2.drawLine(920,150,825,160);
 
         //Left Arm
         g2.setColor(new Color(255, 255, 255));
         // g2.draw() defines the outline made by the shape
         g2.draw(h);
-        g2.drawLine(760,150,825,160);
+        g2.drawLine(730,150,825,160);
 
 
 
