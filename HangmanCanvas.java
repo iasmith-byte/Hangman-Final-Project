@@ -3,8 +3,7 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
-public class HangmanCanvas extends JPanel {
-
+public class HangmanCanvas extends JPanel{
     public void paintComponent(Graphics g) {
         // Casts g as a Graphics2D object, allows us to draw/fill
         // with shape objects
