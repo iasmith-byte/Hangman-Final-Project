@@ -2,7 +2,7 @@
 // https://www.jetbrains.com/help/idea/design-gui-using-swing.html#place_gui_components
 // https://docs.oracle.com/javase/8/docs/api/index.html?javax/swing/package-summary.html
 //https://docs.oracle.com/javase/7/docs/api/java/awt/BorderLayout.html
-//Project Partner Bree Stewart
+//Project Partner Bre Stewart
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -44,7 +44,7 @@ public class HangmanGUI extends JFrame {
     //Panel object for the bottom of the GUI
     private JPanel southBox;
     //Counter variable
-    private int count;
+
 
 
     public HangmanGUI() {
@@ -58,10 +58,22 @@ public class HangmanGUI extends JFrame {
         setLayout(new BorderLayout());
         //getContentPane().setLayout(new FlowLayout());
 
-        //creates an array list containing the word to be guessed
-        List<String> word = Arrays.asList("F","L","O","U","R");
-        //stores the length of the word
-        int n = word.size();
+        //creates new object to read in a word
+        readDictionary dict = new readDictionary();
+        //stores the random word chosen
+        String chosenWord = dict.getRandomWord();
+        //coverts the word chosen to uppercase
+        String upperCase = chosenWord.toUpperCase();
+        //test shows the word chosen, makes sure it's correct format
+        System.out.println(chosenWord);
+        //coverts the word chosen to an array and splits them into individual characters
+        String[] ary = upperCase.split("");
+        //creates a list object for comparison
+        List<String> stringList = new ArrayList<>(Arrays.asList(ary));
+        System.out.println(stringList);
+
+        //stores the length of the word saved
+        int n = stringList.size();
 
         //creates new JPanel object for where the word will be displayed
         textSlots = new JPanel();
@@ -83,7 +95,7 @@ public class HangmanGUI extends JFrame {
         //adds the south box to the gui
         add(southBox, BorderLayout.SOUTH);
 
-
+        GameState ng = new GameState();
         //Button creation
         //String array containing the alphabet
         String[] alphabet = {"A","B","C","D","E","F","G","H","I","J","K","L","M",
@@ -96,23 +108,26 @@ public class HangmanGUI extends JFrame {
                     //letters are set
                     textInput.setText(c);
                     // If the word contains the current alphabet letter
-                    if (word.contains(c)) {
+                    if (stringList.contains(c)) {
                         //loop through the word and compares the element at the index
                         for (int i = 0; i < n; i++) {
-                            if (c.equalsIgnoreCase(word.get(i))) {
+                            if (c.equalsIgnoreCase(stringList.get(i))) {
                                 //stores the dashes in the temp variable
                                 JLabel temp = (JLabel) textSlots.getComponent(i);
                                 //draws the correct letter guessed at the appropriate index
-                                temp.setText(word.get(i));
+                                temp.setText(stringList.get(i));
                             }
                         }
                     }
                     // Else
                     else {
                         //count increments if guessed wrong
-                        count++;
+                        ng.setMistakesCounter(ng.getMistakesCounter()+1);
+                        //redraws the canvas
+                        centerBox.repaint();
                         //displays the number of wrong guesses
-                        displayScore2.setText(String.valueOf(count));
+                        displayScore2.setText(String.valueOf(ng.getMistakesCounter()));
+
                     }
                     // Draw hangman + increase count
                     // If game condition met, end game
@@ -121,6 +136,7 @@ public class HangmanGUI extends JFrame {
                 southBox.add(b);
 
             }
+
 
         //Inner JPanel for Try Again button
         innerBox = new JPanel(new BorderLayout());
@@ -137,7 +153,7 @@ public class HangmanGUI extends JFrame {
         //adds the object top the left hand side of the screen
         add(westBox, BorderLayout.WEST);
         //creates new object for text display of the score
-        displayScore = new JLabel("Score: ");
+        displayScore = new JLabel("Mistakes: ");
         //creates new object of the score
         displayScore2 = new JLabel("0");
         //adds the text display label to the left hand panel
@@ -147,6 +163,8 @@ public class HangmanGUI extends JFrame {
 
         //creates new object in center panel
         centerBox = new HangmanCanvas();
+        //sets the new game state
+        centerBox.setGameState(ng);
         //adds the panel to the center
         add(centerBox, BorderLayout.CENTER);
 
@@ -174,8 +192,7 @@ public class HangmanGUI extends JFrame {
     //Main method to run the game
     public static void main(String[] args) {
         HangmanGUI hg = new HangmanGUI();
-        // user selects letter
-        // update jpanels for word
+
 
 
     }
