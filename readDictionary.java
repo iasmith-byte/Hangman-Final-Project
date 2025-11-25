@@ -21,11 +21,11 @@ public class readDictionary {
             }
             ReadDict.close(); // closes the scanner ReadDict
 
-            //PrintWriter output = new PrintWriter ()
-            Random randomWord = new Random();
+            
+            Random randomWord = new Random(); // creates random object
             int index = randomWord.nextInt(words_In_Dict.size()); // goes throw the array from index 0 to -1
             String random_Word = words_In_Dict.get(index); //gets the index of the words stored in the array
-            System.out.println(random_Word);
+            System.out.println(random_Word); // prints chosen word to terminal
         }
         catch (FileNotFoundException X) {
             System.out.println("Source file Not Found: " + DictionaryFile.getAbsolutePath()); //gives user an error if file can't be found
