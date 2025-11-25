@@ -23,7 +23,7 @@ public class readDictionary {
 
             
             Random randomWord = new Random(); // creates random object
-            int index = randomWord.nextInt(words_In_Dict.size()); // goes throw the array from index 0 to -1
+            int index = randomWord.nextInt(words_In_Dict.size()); // goes through the array from index 0 to -1, also keeps it from going out of bounds
             String random_Word = words_In_Dict.get(index); //gets the index of the words stored in the array
             System.out.println(random_Word); // prints chosen word to terminal
         }
