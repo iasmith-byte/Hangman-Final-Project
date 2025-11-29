@@ -33,5 +33,21 @@ public class readDictionary {
 
 
     }
+    private void writeResultsToFile(int beeCounter, int antennaCounter, int flowerCounter,
+                                           int barryBensonCounter, int honeyCounter) throws IOException {
+        // Create PrintWriter object to write to the results.txt file
+        PrintWriter writer = new PrintWriter(new FileWriter("results.txt"));
+
+
+        // Writes the results in into the results.txt file
+        writer.println("The keyword bee appeared " + beeCounter + " times");
+        writer.println("The keyword antenna appeared " + antennaCounter + " times");
+        writer.println("The keyword flower appeared " + flowerCounter + " times");
+        writer.println("The keyword Barry Benson appeared " + barryBensonCounter + " times");
+        writer.println("The keyword honey appeared " + honeyCounter + " times");
+
+        //close the file
+        writer.close();
+    }
 }
 // Still working on Top scores and Saving Scores
