@@ -52,9 +52,11 @@ public class readDictionary {
 
         try {
             if(currentScore > 0) {
-                scores.addFirst(currentScore);  // Add new current score to beginning
+                scores.add(0,currentScore);  // Add new current score to beginning
+                // works the same way as addFirst except this is for an array list. makes the out of bounds error show up less.
 
-
+                scores.sort(Collections.reverseOrder()); // makes the list of scores sorted
+                
                 // Write all scores to file, overwriting previous content
                 PrintWriter writer = new PrintWriter(new FileWriter("scores.txt"));
 
