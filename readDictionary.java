@@ -1,7 +1,6 @@
+import javax.swing.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 import java.util.random.RandomGenerator;
 import java.io.FileWriter;
 import java.io.FileReader;
@@ -9,6 +8,8 @@ import java.io.IOException;
 import java.io.File;
 
 public class readDictionary {
+
+
     public String getRandomWord() {
         File DictionaryFile = new File("dictionary-2.txt");// Points to Dictionary
         ArrayList<String> words_In_Dict = new ArrayList<>(); // ArrayList to hold the words in the Dict
@@ -33,21 +34,39 @@ public class readDictionary {
 
 
     }
-    private void writeResultsToFile(int beeCounter, int antennaCounter, int flowerCounter,
-                                           int barryBensonCounter, int honeyCounter) throws IOException {
-        // Create PrintWriter object to write to the results.txt file
-        PrintWriter writer = new PrintWriter(new FileWriter("results.txt"));
+
+    public List<Integer> getScores() {
+        String filePath = "scores.txt";
+        List<Integer> scores = new ArrayList<>();
+        try (Scanner scanner = new Scanner(new File(filePath))) {
+            while (scanner.hasNextInt()) {
+                scores.add(scanner.nextInt());
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found: " + e.getMessage());
+        }
+        return scores;
+    }
+
+    public void writeResultsToFile(int currentScore, List<Integer> scores) {
+
+        try {
+            if(currentScore > 0) {
+                scores.addFirst(currentScore);  // Add new current score to beginning
 
 
-        // Writes the results in into the results.txt file
-        writer.println("The keyword bee appeared " + beeCounter + " times");
-        writer.println("The keyword antenna appeared " + antennaCounter + " times");
-        writer.println("The keyword flower appeared " + flowerCounter + " times");
-        writer.println("The keyword Barry Benson appeared " + barryBensonCounter + " times");
-        writer.println("The keyword honey appeared " + honeyCounter + " times");
+                // Write all scores to file, overwriting previous content
+                PrintWriter writer = new PrintWriter(new FileWriter("scores.txt"));
 
-        //close the file
-        writer.close();
+                for (int score : scores) {
+                    writer.println(score);
+                }
+
+                writer.close();
+            }
+        } catch (IOException e) {
+            System.out.println("Error when writing to File");
+        }
     }
 }
 // Still working on Top scores and Saving Scores
