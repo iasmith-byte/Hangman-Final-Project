@@ -9,64 +9,79 @@ import java.io.File;
 
 public class readDictionary {
 
-
+    //Method to select a random word from the dictionary text file
     public String getRandomWord() {
-        File DictionaryFile = new File("dictionary-2.txt");// Points to Dictionary
-        ArrayList<String> words_In_Dict = new ArrayList<>(); // ArrayList to hold the words in the Dict
+        // Points to Dictionary
+        File DictionaryFile = new File("dictionary-2.txt");
+        // ArrayList to hold the words in the Dict
+        ArrayList<String> words_In_Dict = new ArrayList<>();
         try {
-            Scanner ReadDict = new Scanner(DictionaryFile);// reads the dictionary.txt
-            while (ReadDict.hasNext()) {// loops through every word in the file
-                words_In_Dict.add(ReadDict.next()); //Stores the words in the arraylist
+            // reads the dictionary.txt
+            Scanner ReadDict = new Scanner(DictionaryFile);
+            // loops through every word in the file
+            while (ReadDict.hasNext()) {
+                //Stores the words in the arraylist
+                words_In_Dict.add(ReadDict.next());
 
                 // Don't accidentally add a print statement in a loop....
             }
             ReadDict.close(); // closes the scanner ReadDict
 
             //creates new random object
-            Random randomWord = new Random(); // creates random object
-            int index = randomWord.nextInt(words_In_Dict.size()); // goes through the array from index 0 to -1, also keeps it from going out of bounds
+            Random randomWord = new Random();
+            // goes through the array from index 0 to -1, also keeps it from going out of bounds
+            int index = randomWord.nextInt(words_In_Dict.size());
             return words_In_Dict.get(index); //gets the index of the words stored in the array
 
         } catch (FileNotFoundException X) {
-            System.out.println("Source file Not Found: " + DictionaryFile.getAbsolutePath());
+            System.out.println("Source file Not Found: " + X.getMessage());
             return null;//gives user an error if file can't be found
         }
 
 
     }
-
+    //Method to access scores from scores text file
     public List<Integer> getScores() {
+        //Variable storing file name
         String filePath = "scores.txt";
+        //Array list to store the scores
         List<Integer> scores = new ArrayList<>();
+        //Scanner object to read the file
         try (Scanner scanner = new Scanner(new File(filePath))) {
+            //While loop adds the scores the array list
             while (scanner.hasNextInt()) {
                 scores.add(scanner.nextInt());
             }
+            //Error handling if the file is not found
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + e.getMessage());
         }
         return scores;
     }
 
+    //Method to write the scores to file
     public void writeResultsToFile(int currentScore, List<Integer> scores) {
 
         try {
-            if(currentScore > 0) {
-                scores.addFirst(currentScore);  // Add new current score to beginning
+            // Add new current score to beginning
+            if(currentScore >= 0) {
+                scores.addFirst(currentScore);
 
 
                 // Write all scores to file, overwriting previous content
                 PrintWriter writer = new PrintWriter(new FileWriter("scores.txt"));
 
+                //for each loop writes the scores text file
                 for (int score : scores) {
                     writer.println(score);
                 }
-
+                //closes the file succuessfuly
                 writer.close();
             }
+            //error handling for issues writing to the text file
         } catch (IOException e) {
             System.out.println("Error when writing to File");
         }
     }
 }
-// Still working on Top scores and Saving Scores
+

@@ -42,15 +42,23 @@ public class HangmanGUI extends JFrame {
     private final List<JButton> letterButtons = new ArrayList<>();
     //Upper case random word chosen
     private String chosenWordUpper;
-    //New game button
+    //New game JButton
     private JButton newGame;
+    //New Gamestate object that tracks progress
     private GameState ng = new GameState(0);
+    //ArrayList
     private List<String> stringList;
+    //dic object for accessing the random word to be guessed
     private final readDictionary dict;
+    //unused variable
     private String newWord;
+    //stores the length of the word
     private int n;
+    //JLabel for the current score label in GUI
     private final JLabel currentScoreLabel = new JLabel("Current Score: ");
+    //JLabel for the current score value label in GUI
     private final JLabel currentScoreValue = new JLabel("0");
+    //JLabel for the High Scores label in GUI
     private final JLabel highScoreText = new JLabel("High Scores");
     //1st top score
     private final JLabel highScore1Value = new JLabel();
@@ -70,6 +78,7 @@ public class HangmanGUI extends JFrame {
         //creates new object to read in a word
         this.dict = new readDictionary();
         List<Integer> scores = dict.getScores();
+        //calls methods to handle the game logic
         init(scores, currentScore);
         getClue();
         drawClue();
@@ -82,14 +91,15 @@ public class HangmanGUI extends JFrame {
 
     //Main method to run the game
     public static void main(String[] args) {
-        //instantiates the object and sets the current
+        //instantiates the object and sets the current score
         HangmanGUI hg = new HangmanGUI(0);
     }
 
     private void drawScore(List<Integer> scores) {
         //TODO: Left hand box for mistakes JPanel
-        //creates new panel object for the left hand side of the GUI
+        //creates new panel object
         westBox = new JPanel();
+        //sets the layout of the JPanel to the left hands side of the GUI
         westBox.setLayout(new BoxLayout(westBox, BoxLayout.Y_AXIS));
         //adds the object top the left hand side of the screen
         add(westBox, BorderLayout.WEST);
@@ -102,26 +112,36 @@ public class HangmanGUI extends JFrame {
 
         //adds the display score label to the JPanel
         mistakePanel.add(displayScoreLabel);
+        //adds the display score value to the JPanel
         mistakePanel.add(displayScoreValue);
         //adds the text display label to the left hand panel
         westBox.add(mistakePanel);
 
+        //creates a new JPanel for the scores
         JPanel scorePanel = new JPanel();
         // Current Score
         JPanel currentScorePanel = new JPanel(new FlowLayout());
+        //adds the current score value
         currentScorePanel.add(currentScoreLabel);
+        //adds the current score value to the JPanel
         currentScorePanel.add(currentScoreValue);
-        scorePanel.add(currentScorePanel);
 
+        scorePanel.add(currentScorePanel);
+        //Array list contains the scores from the scores text file
         List<Integer> tempScores = new ArrayList<Integer>(scores);
+        //sorts the scores in the correct order
         tempScores.sort(Collections.reverseOrder());
 
-        // Current Score
+        //creates new JPanel for the highScore
         JPanel highScorePanel = new JPanel();
+        //sets the layout for the panel descending
         highScorePanel.setLayout(new BoxLayout(highScorePanel, BoxLayout.Y_AXIS));
+        //adds the highscore text to the label
         highScorePanel.add(highScoreText);
-        // Top Score
+
+        // Top Score JPanel
         JPanel highScore1Panel = new JPanel(new FlowLayout());
+
         //TODO: Set to Highest score
         //highScore1Value.setText(tempScores.getFirst().toString());
 
@@ -130,7 +150,8 @@ public class HangmanGUI extends JFrame {
         highScore1Panel.add(highScore1Label);
         highScore1Panel.add(highScore1Value);
         highScorePanel.add(highScore1Panel);
-        // Second
+
+        // Second highest score JPanel
         JPanel highScore2Panel = new JPanel(new FlowLayout());
         //TODO: Set to Second Highest score
        // highScore2Value.setText(tempScores.get(1).toString());
@@ -140,7 +161,8 @@ public class HangmanGUI extends JFrame {
         highScore2Panel.add(highScore2Label);
         highScore2Panel.add(highScore2Value);
         highScorePanel.add(highScore2Panel);
-        // Third
+
+        // Third highest score JPanel
         JPanel highScore3Panel = new JPanel(new FlowLayout());
         //TODO: Set to Third Highest score
         //highScore3Value.setText(tempScores.get(2).toString());
@@ -150,15 +172,15 @@ public class HangmanGUI extends JFrame {
         highScore3Panel.add(highScore3Label);
         highScore3Panel.add(highScore3Value);
         highScorePanel.add(highScore3Panel);
-
+        //adds the highscore panel to the Gui
         scorePanel.add(highScorePanel);
+        //adds the current score and highscore panel to the westbox panel
         westBox.add(currentScorePanel);
         westBox.add(highScorePanel);
 
     }
 
     private void drawGuess(List<Integer> scores) {
-
         //Button creation
         //String array containing the alphabet
         String[] alphabet = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
@@ -180,7 +202,9 @@ public class HangmanGUI extends JFrame {
                             JLabel temp = (JLabel) this.textSlots.getComponent(i);
                             //draws the correct letter guessed at the appropriate index
                             temp.setText(HangmanGUI.this.stringList.get(i));
+                            //correct guesses counter is incremented by one if guess is correct
                             ng.setCorrectGuesses(ng.getCorrectGuesses() + 1);
+                            //tester shows the counter incrementing
                             System.out.println(ng.getCorrectGuesses());
                         }
                     }
@@ -191,21 +215,25 @@ public class HangmanGUI extends JFrame {
                     ng.setMistakesCounter(ng.getMistakesCounter() + 1);
                     //redraws the canvas
                     centerBox.repaint();
-                    //displays the number of wrong guesses
+                    //displays the number of wrong guesses in the JLabel
                     displayScoreValue.setText(String.valueOf(ng.getMistakesCounter()));
 
                 }
                 // Draw hangman + increase count
                 // If game condition met, end game
                 b.setEnabled(false);
-
+                //if statements checks if the player has made 6 mistkes and drawn the hangman
                 if (ng.getMistakesCounter() >= 6) {
+                    //calls the gameover method and the player loses
                     gameOver();
                 }
+                //If statement checks if the player has correctly guessed the number of letters in the word
                 if (ng.getCorrectGuesses() == n) {
+                    //calls the isWon method if the player has won the game
                     isWon();
                 }
             });
+            //adds the buttons to the south box Panel of the GUI
             southBox.add(b);
 
         }
@@ -254,14 +282,13 @@ public class HangmanGUI extends JFrame {
         String chosenWord = dict.getRandomWord();
         //coverts the word chosen to uppercase
         this.chosenWordUpper = chosenWord.toUpperCase();
-        //String chosenWordUpper = chosenWord.toUpperCase();
         //test shows the word chosen, makes sure it's correct format
         System.out.println(chosenWord);
         //coverts the word chosen to an array and splits them into individual characters
         String[] chosenWordArray = chosenWordUpper.split("");
         //creates a list object for comparison
-        //List<String> stringList = new ArrayList<>(Arrays.asList(chosenWordArray));
         this.stringList = new ArrayList<>(Arrays.asList(chosenWordArray));
+        //shows the correct word to guess for testing purposes
         System.out.println(stringList);
 
         //stores the length of the random word
@@ -277,20 +304,20 @@ public class HangmanGUI extends JFrame {
         setSize(1200, 800);
         //manages the layout of the screen
         setLayout(new BorderLayout());
+        //dict.writeResultsToFile(0, scores);
 
         //Handles window being closed by "x"
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                // Your code here - runs when X is clicked
+                //runs when X button is clicked
                 dict.writeResultsToFile(ng.getCurrentScore(), scores);
-                // Save data, cleanup, etc.
             }
         });
 
         //creates a new gamestate object
         this.ng = new GameState(currentScore);
-
+        //updates the JLabel in the GUI with the current score
         this.currentScoreValue.setText(String.valueOf(ng.getCurrentScore()));
 
         //Creates a JPanel object container for the bottom of the GUI
@@ -319,7 +346,7 @@ public class HangmanGUI extends JFrame {
 
     //TODO: Create method that checks if the game has been won.
     public void isWon() {
-        // 1. Disable all letter buttons
+        //For each loop sisable all letter buttons after the game ends
         for (JButton b : letterButtons) {
             b.setEnabled(false);
         }
@@ -331,6 +358,7 @@ public class HangmanGUI extends JFrame {
 
         //Update current score
         ng.setCurrentScore(ng.getCurrentScore() + 1);
+        //updates the value of the JLabel
         currentScoreValue.setText(String.valueOf(ng.getCurrentScore()));
 
         //Pop up message telling the player they won and displaying the correct word
@@ -352,7 +380,7 @@ public class HangmanGUI extends JFrame {
     //TODO: Create method to check if counter has reached 6, and the player has lost the game.
     public void gameOver() {
 
-        //Disable all letter buttons
+        //For each loop disable all letter buttons once game ends
         for (JButton b : letterButtons) {
             b.setEnabled(false);
         }
@@ -364,7 +392,7 @@ public class HangmanGUI extends JFrame {
         //sets the JLabel to 0
         currentScoreValue.setText("0");
 
-        //Show message with correct word
+        //Pop up messages Show displays game over and the correct word
         JOptionPane.showMessageDialog(
                 this,
                 "GAME OVER!\nThe correct word was: " + chosenWordUpper,

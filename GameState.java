@@ -12,15 +12,14 @@ public class GameState {
         this.currentScore = currentScore;
 
     }
-
+    //gets the current scores
     public int getCurrentScore() {
         return currentScore;
     }
-
+    //sets the current scores
     public void setCurrentScore(int currentScore) {
         this.currentScore = currentScore;
     }
-
 
     //getter for correct guesses counter
     public int getCorrectGuesses(){
@@ -42,7 +41,7 @@ public class GameState {
     public boolean isWon() {
         return won;
     }
-    //boolean for
+    //boolean for changing the boolean
     public void setWon(boolean won) {
         this.won = won;
     }
