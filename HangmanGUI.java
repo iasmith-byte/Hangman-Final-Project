@@ -141,33 +141,25 @@ public class HangmanGUI extends JFrame {
         // Top Score JPanel
         JPanel highScore1Panel = new JPanel(new FlowLayout());
 
-        //TODO: Set to Highest score
-        //highScore1Value.setText(tempScores.getFirst().toString());
-
-         highScore1Value.setText(tempScores.size() > 0 ? String.valueOf(tempScores.get(0)): "0"); // checks the size of the list, used the ternary (?) to set the true false value
-        // the "0" is just a placeholder if the list is empty.
+        // checks the size of the list, used the ternary (?) to set the true false value
+        highScore1Value.setText(!tempScores.isEmpty() ? String.valueOf(tempScores.getFirst()): "0");
         highScore1Panel.add(highScore1Label);
         highScore1Panel.add(highScore1Value);
         highScorePanel.add(highScore1Panel);
 
         // Second highest score JPanel
         JPanel highScore2Panel = new JPanel(new FlowLayout());
-        //TODO: Set to Second Highest score
-       // highScore2Value.setText(tempScores.get(1).toString());
-
-        highScore2Value.setText(tempScores.size() > 1 ? String.valueOf(tempScores.get(1)) : "0"); // checks the size of the list, used the ternary (?) to set the true false value
-        // this one checks the scores to see if there is one item in the array.
+        // checks the size of the list, used the ternary (?) to set the true false value
+        highScore2Value.setText(tempScores.size() > 1 ? String.valueOf(tempScores.get(1)) : "0");
         highScore2Panel.add(highScore2Label);
         highScore2Panel.add(highScore2Value);
         highScorePanel.add(highScore2Panel);
 
         // Third highest score JPanel
         JPanel highScore3Panel = new JPanel(new FlowLayout());
-        //TODO: Set to Third Highest score
-        //highScore3Value.setText(tempScores.get(2).toString());
 
-        highScore3Value.setText(tempScores.size() > 2 ? String.valueOf(tempScores.get(2)) : "0");
         // this one checks the scores to see if there are two items in the array.
+        highScore3Value.setText(tempScores.size() > 2 ? String.valueOf(tempScores.get(2)) : "0");
         highScore3Panel.add(highScore3Label);
         highScore3Panel.add(highScore3Value);
         highScorePanel.add(highScore3Panel);
@@ -385,6 +377,7 @@ public class HangmanGUI extends JFrame {
         //Disable text input
         textInput.setEnabled(false);
 
+        //writes the score you made it to the file
         dict.writeResultsToFile(ng.getCurrentScore(), scores);
 
         //reset the score to 0 after losing a game
