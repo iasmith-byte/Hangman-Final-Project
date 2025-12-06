@@ -96,7 +96,6 @@ public class HangmanGUI extends JFrame {
     }
 
     private void drawScore(List<Integer> scores) {
-        //TODO: Left hand box for mistakes JPanel
         //creates new panel object
         westBox = new JPanel();
         //sets the layout of the JPanel to the left hands side of the GUI
@@ -225,7 +224,7 @@ public class HangmanGUI extends JFrame {
                 //if statements checks if the player has made 6 mistkes and drawn the hangman
                 if (ng.getMistakesCounter() >= 6) {
                     //calls the gameover method and the player loses
-                    gameOver();
+                    gameOver(scores);
                 }
                 //If statement checks if the player has correctly guessed the number of letters in the word
                 if (ng.getCorrectGuesses() == n) {
@@ -304,7 +303,6 @@ public class HangmanGUI extends JFrame {
         setSize(1200, 800);
         //manages the layout of the screen
         setLayout(new BorderLayout());
-        //dict.writeResultsToFile(0, scores);
 
         //Handles window being closed by "x"
         addWindowListener(new WindowAdapter() {
@@ -354,7 +352,6 @@ public class HangmanGUI extends JFrame {
         //Disable text input
         textInput.setEnabled(false);
 
-        ng.setWon(true);
 
         //Update current score
         ng.setCurrentScore(ng.getCurrentScore() + 1);
@@ -378,7 +375,7 @@ public class HangmanGUI extends JFrame {
     }
 
     //TODO: Create method to check if counter has reached 6, and the player has lost the game.
-    public void gameOver() {
+    public void gameOver(List<Integer> scores) {
 
         //For each loop disable all letter buttons once game ends
         for (JButton b : letterButtons) {
@@ -387,6 +384,9 @@ public class HangmanGUI extends JFrame {
 
         //Disable text input
         textInput.setEnabled(false);
+
+        dict.writeResultsToFile(ng.getCurrentScore(), scores);
+
         //reset the score to 0 after losing a game
         ng.setCurrentScore(0);
         //sets the JLabel to 0

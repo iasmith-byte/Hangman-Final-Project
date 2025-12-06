@@ -37,10 +37,6 @@ public class GameState {
     public void setCorrectGuesses(int correctGuesses){
         this.correctGuesses = correctGuesses;
     }
-    //boolean for checking if win condition is met
-    public boolean isWon() {
-        return won;
-    }
     //boolean for changing the boolean
     public void setWon(boolean won) {
         this.won = won;

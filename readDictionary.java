@@ -1,6 +1,8 @@
 import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.util.*;
+import java.util.List;
 import java.util.random.RandomGenerator;
 import java.io.FileWriter;
 import java.io.FileReader;
@@ -46,8 +48,16 @@ public class readDictionary {
         String filePath = "scores.txt";
         //Array list to store the scores
         List<Integer> scores = new ArrayList<>();
+        File scoreFile = new File(filePath);
+        try {
+            if (scoreFile.createNewFile())
+                System.out.println("File created: scores.txt");
+        }catch (IOException e){
+            System.out.println("Error creating file: scores.txt");
+        }
+
         //Scanner object to read the file
-        try (Scanner scanner = new Scanner(new File(filePath))) {
+        try (Scanner scanner = new Scanner(scoreFile)) {
             //While loop adds the scores the array list
             while (scanner.hasNextInt()) {
                 scores.add(scanner.nextInt());
@@ -61,7 +71,6 @@ public class readDictionary {
 
     //Method to write the scores to file
     public void writeResultsToFile(int currentScore, List<Integer> scores) {
-
         try {
             // Add new current score to beginning
             if(currentScore >= 0) {
